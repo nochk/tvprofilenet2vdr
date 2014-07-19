@@ -1,0 +1,13 @@
+Source: vdr-plugin-xmltv2vdr-grabber-tvprofilenet2xmltv
+Section: video
+Priority: extra
+Maintainer: nochk <nochks@yahoo.de>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.4
+Homepage: https://github.com/nochk/tvprofilenet2xmltv
+
+Package: vdr-plugin-xmltv2vdr-grabber-tvprofilenet2xmltv
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, sed, grep, coreutils, curl, gzip
+Description: tvprofilenet2xmltv Grabber
+ tvprofilenet2xmltv Grabber for vdr-plugin-xmltv2xmltv

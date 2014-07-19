@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIST=`cat /var/lib/epgsources/tvprofilenet2vdr`
+DIST=`cat /var/lib/epgsources/tvprofilenet2xmltv`
 args=("$@")
 LAST=`expr $# - 1`
 
