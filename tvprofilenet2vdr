@@ -1,0 +1,35 @@
+#!/bin/bash
+
+DIST=`cat /var/lib/epgsources/tvprofilenet2vdr`
+args=("$@")
+LAST=`expr $# - 1`
+
+for ((i=0; i < $#; i++))
+{
+	if [ "$i" -eq "0" ]; then
+		echo -n ""
+		#echo "Days: $1"
+	elif [ "$i" -eq "1" ]; then
+		echo -n ""
+		#echo "Pin: $2"
+	elif [ "$i" -eq "2" ]; then
+		echo -n ""
+		#echo "???: $3"
+	else
+		#echo "Channels ${args[$i]}"
+		CHANNEL2="${args[$i]}"
+		CHANNEL1=`echo "$DIST" | grep "${CHANNEL2}" | sed -r "s/^[^;]*;//"`
+		URL=http://tvprofil.net/xmltv/data/${CHANNEL1}/weekly_${CHANNEL1}_tvprofil.net.xml
+		PAGE=`curl "$URL" 2>/dev/null | sed -r "s/${CHANNEL1}/${CHANNEL2}/"`
+		if [ "$i" -ne "3" ]; then
+			PAGE=`echo "${PAGE}" | tail -n +2 | sed -r "N;/\n/s/<tv[^<>]*>//"`
+		fi
+		if [ "$i" -ne "$LAST" ]; then
+			PAGE=`echo "${PAGE}" | sed -r "s/<\/tv[^<>]*>//"`
+		fi
+		echo "${PAGE}"
+	fi
+}
+
+exit 0
+
